@@ -1,0 +1,10 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/ODG-Record.t
+lib/ODG/Record.pm
+lib/ODG/Layout.pm
+lib/ODG/Metadata.pm
+
+META.yml                                 Module meta-data (added by MakeMaker)

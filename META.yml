@@ -1,0 +1,14 @@
+--- #YAML:1.0
+name:                ODG-Record
+version:             0.26
+abstract:            Perl extension for manipulating row based records. 
+license:             ~
+author:              
+    - Christopher Brown <cbrown@hungrygoat.org>
+generated_by:        ExtUtils::MakeMaker version 6.44
+distribution_type:   module
+requires:     
+    Moose:                         0.4
+meta-spec:
+    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
+    version: 1.3

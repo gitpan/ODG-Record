@@ -1,0 +1,9 @@
+Revision history for Perl extension VDS::Record.
+
+0.01  Wed Mar 19 14:33:14 2008
+	- original version; created by h2xs 1.23 with options
+		-XAn VDS::Record
+
+0.25  Thu Mar 27 12:00:00 2008
+    - First release version 
+
