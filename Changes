@@ -7,3 +7,6 @@ Revision history for Perl extension VDS::Record.
 0.25  Thu Mar 27 12:00:00 2008
     - First release version 
 
+0.27  Mon Jul 7 12:00:00 2008
+    - Fixed dependencies in Makefile.PL
+

@@ -244,7 +244,7 @@ The _metadata_ can be accessed by name or by position.
   $layout->get(0);               # Same using MooseX::AttributeHelpers
 
 
-=head2 TODO: push, pop, shift, unshift, insert
+=head2 get, set, push, pop, shift, unshift, insert
 
 This permits the layout defintiion to be built one field at a time
 or cloned and modified.
@@ -252,7 +252,7 @@ or cloned and modified.
 See L<MooseX::AttributeHelpers>
 
 
-=head2 TODO: clear, delete, empty
+=head2 clear, delete, empty
 
 See L<MooseX::AttributeHelpers>
 
@@ -281,6 +281,14 @@ slot.
 Installs named based accessors to ODG::Metadata objects in the 
 _metadata_ slot.  One accessor is defined and named for each 
 ODG::Metadata object.
+                 
+
+=head1 Extending
+
+    package My::Layout;
+    use Moose;
+        with 'ODG::Layout';
+
 
 =head1 TODO
 
@@ -290,12 +298,8 @@ Should we provide a return value (T/F) for succes of the private methods.
 
 =item * Enforce unique metadata names(?)
 
-
-=head1 Extending
-
-    package My::Layout;
-    use Moose;
-        with 'ODG::Layout';
+=item * Refactor to make ODG::Layout an extensible class rather than a
+role.
 
 
 =head1 SEE ALSO
@@ -321,4 +325,4 @@ it under the same terms as Perl itself, either Perl version 5.10.0 or,
 at your option, any later version of Perl 5 you may have available.
 
 
-=cut
+=cut 
