@@ -8,7 +8,7 @@ WriteMakefile(
     VERSION_FROM      => 'lib/ODG/Record.pm', # finds $VERSION
     PREREQ_PM         => { 
                             Moose => 0.40 , 
-                            'MooseX::AttributeHelpers' => 0 ,
+                            'MooseX::AttributeHelpers' => 0.13 ,
                         }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/ODG/Record.pm', # retrieve abstract from module

@@ -1,15 +1,14 @@
 # Before `make install' is performed this script should be runnable with
-# `make test'. After `make install' it should work as `perl VDS-Record.t'
+# `make test'. After `make install' it should work as `perl ODG-Record.t'
 
 #########################
 # change 'tests => 1' to 'tests => last_test_to_print';
 
-use Test::More tests => 18;
+use Test::More tests => 17;
 use Benchmark qw( :all :hireswallclock );
 use Data::Dumper;
 
 BEGIN { print "\nSection 1: Using Mods\n" };
-BEGIN { use_ok('Moose') };
 BEGIN { use_ok('ODG::Record') };
 BEGIN { use_ok('ODG::Layout') };
 BEGIN { use_ok('ODG::Metadata') };
@@ -36,7 +35,7 @@ print "\nSection 2: ODG::Metadata\n";
 
     can_ok( $metadata_1, qw( name ) );
 
-    ok( $metadata_1->name eq 'first_name', 'Accessing via accessor' );
+    ok( $metadata_1->name   eq 'first_name', 'Accessing via accessor' );
     ok( $metadata_1->{name} eq 'first_name', 'Accessing directly directly' );
 
     # is_faster( -5, sub { $metadata_1->name; }, sub { $metadata_1->{name}; } );
@@ -89,6 +88,9 @@ BEGIN {
     ok( $layout->get(2)->name eq 'daughter' ,
         "Push metadata field"
     );
+    
+    # print Dumper $layout;
+    # die;
 
 ###########################    
 print "\nSection 4: ODG::Record\n";

@@ -1,4 +1,4 @@
-our $VERSION = '0.27';
+our $VERSION = '0.28';
 
 
 # ----------------------------------------------------------------------
@@ -77,29 +77,21 @@ sub BUILD {
   # ---------------------------------------------------------------
     my $methods = {};
     METHODS: foreach my $field ( @{ $self->_layout_->_metadata_ } ) {
-        
-        $methods->{ $field->name } = 
-            sub :lvalue { 
+    
+      # add_method:
+        $self->meta->add_method( $field->name , sub :lvalue { 
 
               # Update the old value if used  second argument is passed 
                 $self->{_data_}->[ $field->{ index } ] = $_[1] if ( $_[1] ); 
         
               # LVALUE return 
                 $self->{_data_}->[ $field->{ index } ] ;
-            };
+            }
+        )
 
     } # END LOOP: METHODS 
 
-    
-  # ---------------------------------------------------------------
-  # RE-BLESS 
-  #     into an anonymous subclass so methods can be installed into 
-  #     the subclass without affecting the package
-  # ---------------------------------------------------------------
-    $self->meta->create_anon_class( 
-        superclasses    => [ __PACKAGE__ , 'ODG::Layout' ] ,
-        methods         => $methods ,
-    )->rebless_instance( $self );    
+    return( $self );
 
 } # END SUB: BUILD
 
@@ -110,7 +102,7 @@ __END__
 
 =head1 NAME
 
-ODG::Record - Perl extension for manipulating row based records. 
+ODG::Record - Perl extension for efficient and simple manipulation of row based records. 
 
 =head1 SYNOPSIS
 
@@ -128,10 +120,21 @@ ODG::Record - Perl extension for manipulating row based records.
 
 =head1 DESCRIPTION
 
-ODG::Record is an extensible class for efficiently dealing with row 
-based records.  Data and layout information are separate concerns 
-existing in seperate slots (_data_ and _layout_ ) within the 
-ODG::Record object.
+ODG::Record is an extensible class for efficiently and simply working
+with row based records.  In short, this module provides two functions:
+lvalue accesors to the record (for simplicity) and manipultation data
+using an ArrayRefs for (for Performance).
+
+lvalue accessors allow you to be terse with your code.
+
+    $record->first_name = "Frank" 
+
+
+
+head1 DETAILS
+
+Data and layout information are separate concerns existing in seperate 
+slots (_data_ and _layout_ ) within the ODG::Record object.
 
 Since the _layout_ (i.e. metadata) does not change between records, 
 separating the _data_ from _layout_ allows for greater efficient 
@@ -247,7 +250,7 @@ record object requires instantiation (costly).
 
 =head2 Mixing of attributes, data and metadata
 
-It seems really bad design to store object attributes, data and metadata
+It is bad design to store object attributes, data and metadata
 in the same construct, ie all as attributes.  A conflict arises when 
 the field names of data conflict with the field names of the metadata.
 These should be seperated.
@@ -320,43 +323,6 @@ Convenience method for accessing the _layout_->_metadata_ object.
 
 None by default.
 
-
-
-=head1 TODO
-
-=item * 
-
-Can object methods be installed to work with the fields such as 
-CREDIT_CARD_NUMBER encrypt?  Should objects or attributes be created 
-for each of the fields?  How can this be done in a way as to not sacrifice 
-performance.  Can we recycle each of those objects, too.
-
-  $record->CREDIT_CARD_NUMBER->encrypt;
-
-What about:
-
-  $record->encrypt_CREDIT_CARD_NUMBER? 
-
-
-=item *
-
-Indexed based access.  Allow for $record->_1_, i.e. access to
-record by _data_ slot postion.   
-
-=item * 
-
-RecordIterator class.  Subclass that itererates over a record set.  This
-will likely be ODG::ETL::Extractor ( ODG::ETL::E, for short )
-
-=item * 
-
-MooseX::AttirbuteHelpers::Collection::Array for the _data_ slot (?)
-providing list based methods
-
-=item * 
-
-Some checking when _data_ is set or changed.  Minimally that _data_ has
-the same number of elements as _layout_->_metadata_.
 
 =head1 SEE ALSO
 
