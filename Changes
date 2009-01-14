@@ -1,4 +1,14 @@
-Revision history for Perl extension VDS::Record.
+Revision history for Perl extension ODG::Record.
+
+0.30  Wed Jan 14 2009
+    - Greatly simplified API.
+      - Record fields are specified by Meta Attribute Traits
+      - Removed _metadata_ slot. 
+      - Refactor the attribute accessors
+    - Changed name of slot from _data_ to _data. This seems more in line
+      with Moose and some functional languages.
+    - Added dependence on MooseX::Meta::Attribute::Index
+    - Improved documentation
 
 0.28  Wed Oct 1 2008
     - Required Dependency MooseX::AttributeHelpers => 0.13 
